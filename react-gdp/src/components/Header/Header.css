@@ -1,0 +1,77 @@
+@import '../../assets/styles/styles.css';
+
+.header {
+	position: absolute;
+	height: 65px;
+	background-color: #519E8A;
+	width: 100%;
+	top: 0;
+	left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Ubuntu';
+}
+
+.header-logo {
+  display: flex;
+  margin-left: 25px;
+}
+
+.header-title {
+  margin: 0 auto;
+  padding-left: 10px;
+}
+
+.logo {
+  height: 38px;
+}
+
+.navbar {
+  padding-right: 8%;
+  position: relative;
+  margin-right: 50px;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: white;
+  padding: 0 10px;
+}
+
+.search:focus {
+  outline: none;
+  box-shadow: 0 0 3pt 2pt grey;
+}
+
+.navbar .searchbar {
+  position: absolute;
+  right: 7px;
+  top: -2.5px;
+  border: none;
+  margin: 2px 0px 3px 3px;
+  border-radius: 15px 0 0 15px;
+  padding: 0 5px 3px 10px;
+  font-size: calc(10px + .7vmin);
+  width: 110px;
+  background: inherit;
+  caret-color: white;
+  color: white;
+}
+.searchbar:focus {
+  outline: none;
+}
+.searchbar::placeholder {
+  color: white;
+}
+
+.navbar .searchicon{
+  max-width: 19px;
+  max-height: 19px;
+  position: absolute;
+  right: -20px;
+  top: -1px;
+  background: inherit;
+  padding: 3px 12px 3px 0px;
+  border-radius: 0 15px 15px 0;
+}

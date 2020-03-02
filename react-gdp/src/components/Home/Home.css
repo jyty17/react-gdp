@@ -1,0 +1,16 @@
+@import '../../assets/styles/styles.css';
+
+.layout {
+	display: flex;
+  width: 70%;
+  max-width: 70%;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+.intro {
+  color: black;
+  font-family: 'Ubuntu';
+  font-weight: lighter;
+  font-size: 21px;
+}
