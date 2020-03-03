@@ -6,6 +6,7 @@
   max-width: 70%;
   flex-wrap: wrap;
   margin: 0 auto;
+  background-color: #DAD7CD;
 }
 
 .intro {
@@ -13,4 +14,18 @@
   font-family: 'Ubuntu';
   font-weight: lighter;
   font-size: 21px;
+}
+
+.pageButton {
+  width: 70%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+button {
+  background-color: #519E8A;
+  height: 30px;
+  width: 50px;
+  color: white;
+  border-radius: 15px;
 }

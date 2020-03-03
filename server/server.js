@@ -2,10 +2,10 @@ var express = require('express');
 var http = require('http');
 var Pool = require('pg').Pool;
 var pg = new Pool({
-	user: 'Jerry',
-	host: 'localhost',
-	database: 'gdp',
-	port: 5432
+  user: 'Jerry',
+  host: 'localhost',
+  database: 'gdp',
+  port: 5432
 });
 var cors = require('cors')
 
@@ -17,20 +17,20 @@ const PORT = 3003
 app.get("/", (req, res) => res.send('hello'))
 
 app.get("/countries", (req, res) => {
-	pg.query(
-    'SELECT "Country Name", "2018" as gdp from accounts \
+  pg.query(
+    'SELECT countryname, "2018" gdp from accounts \
+    RIGHT JOIN countries USING (countryname)\
     WHERE "2018" > 0 \
     ORDER BY gdp DESC \
-    LIMIT 10 \
     ',
     (error, result) => {
-  		if(error) {
+      if(error) {
         throw error
       }
       console.log(result.rows)
       return res.status(200).json(result.rows)
       // res.send()
-  	})
+    })
 })
 
 // app.get("/countriesgdp" (req, res) => {})

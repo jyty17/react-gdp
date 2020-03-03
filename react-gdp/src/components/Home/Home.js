@@ -9,8 +9,10 @@ class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      countries: [],
-      data: {}
+      raw_data: {},
+      start_index: 0,
+      end_index: 10,
+      data: []
     }
   }
   componentDidMount() {
@@ -21,34 +23,56 @@ class Home extends React.Component {
       })
   }
 
-	render() {
-    // console.log(typeof(this.state.data));
-    const countries = this.state.data;
-    Object.keys(countries).map((type) => {
-      console.log(countries[type])
+  index_forward(e) {
+    this.setState({ 
+      start_index: this.state.start_index + 10,
+      end_index: this.state.end_index + 10
     })
-    const count = Object.keys(countries).map((k) => {
-      return <Thumbnail name={countries[k]['Country Name']} gdp={countries[k]['gdp']}></Thumbnail>
-    });
+  }
+
+  index_backward(e) {
+    this.setState({
+      start_index: this.state.start_index - 10,
+      end_index: this.state.end_index - 10
+    })
+  }
+
+	render() {
+    // const countries = this.state.data
+    // Object.keys(countries).map((type) => {
+    //   console.log(countries[type])
+    // })
+    // const count = Object.keys(countries).map((k) => {
+    //   return <Thumbnail name={countries[k]['countryname']} gdp={countries[k]['gdp']}></Thumbnail>
+    // });
+    const { start_index, end_index, data } = this.state;
+    const dat = data.slice(start_index, end_index);
+    console.log(dat, start_index, end_index);
+    // const page = dat.map(x => console.log(x))
 		return (
 			<div>
         <Header />
         <div className="layout">
-          <h1 className="intro">*This App* shows national GDP (Gross Domestic Product) data from across the world from 1960 to 2018</h1>
+          <h1 className="intro">NatGDP shows national GDP (Gross Domestic Product) data from across the world from 1960 to 2018</h1>
         </div>
 				<div className="layout">
         {
-          count
-        }
-        {
-					// <Thumbnail name="1" gdp="$"></Thumbnail>
-					// <Thumbnail name="2" gdp="$$"></Thumbnail>
-					// <Thumbnail name="3" gdp="$$$"></Thumbnail>
-					// <Thumbnail name="4" gdp="$$$$"></Thumbnail>
-     //      <Thumbnail name="5" gdp="$$$$$"></Thumbnail>
-     //      <Thumbnail name="6" gdp="$$$$$$"></Thumbnail>
+          dat.map(x =>
+            <Thumbnail name={x['countryname']} gdp={x['gdp']}></Thumbnail>
+          )
         }
 				</div>
+        <div className="pageButton">
+        {
+          start_index > 0 && 
+            <button onClick={this.index_backward.bind(this)}>last</button>
+        }
+        {
+          end_index < data.length && 
+            <button onClick={this.index_forward.bind(this)}>next</button>
+        }
+          
+        </div>
 			</div>
     )
 	}

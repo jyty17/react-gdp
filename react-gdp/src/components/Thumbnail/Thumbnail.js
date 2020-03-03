@@ -5,27 +5,19 @@ class Thumbnail extends React.Component {
 	constructor(props) {
 		super(props);
     this.state = {
-      name: this.props.name,
-      gdp: this.props.gdp,
-      displayed_text: ''
+      hover: false
     };
 	}
-
-  componentWillMount() {
-    this.setState({ displayed_text: this.state.name })
-  }
 
 	render() {
   	return (
       <div
         className="thumb"
-        onMouseEnter={() => this.setState({displayed_text: this.state.gdp})}
-        onMouseLeave={() => this.setState({displayed_text: this.state.name})}
+        onMouseEnter={ () => this.setState({ hover: true }) }
+        onMouseLeave={ () => this.setState({ hover: false }) }
       >
       {
-        // <h1 className="thumb-name">{this.state.name}</h1>
-        // <h1 className="thumb-gdp">{this.state.text}</h1>
-        <h1 className="thumb-name">{this.state.displayed_text}</h1>
+        <h1 className="thumb-name">{ this.state.hover ? this.props.gdp : this.props.name }</h1>
       }
       </div>
     );
