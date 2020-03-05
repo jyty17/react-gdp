@@ -4,16 +4,21 @@ import './Home.css';
 import URL from '../env.js';
 import Thumbnail from '../Thumbnail/Thumbnail.js';
 import Header from '../Header/Header.js';
+import Card from '../Card/Card.js';
 
 class Home extends React.Component {
   constructor() {
     super();
     this.state = {
-      raw_data: {},
       start_index: 0,
       end_index: 10,
-      data: []
+      data: [],
+      showModal: false,
+      countryCode: ""
     }
+
+    this.closeModal = this.closeModal.bind(this);
+    this.openModal = this.openModal.bind(this);
   }
   componentDidMount() {
     fetch(URL+'/countries')
@@ -37,28 +42,49 @@ class Home extends React.Component {
     })
   }
 
+  closeModal() {
+    this.setState({
+      showModal: !this.state.showModal
+    });
+    console.log(this.state.showModal);
+  }
+
+  openModal(countCode) {
+    this.setState({
+      showModal: !this.state.showModal,
+      countryCode: countCode
+    });
+    console.log(this.state.showModal, this.state.countryCode);
+  }
+
 	render() {
-    // const countries = this.state.data
-    // Object.keys(countries).map((type) => {
-    //   console.log(countries[type])
-    // })
-    // const count = Object.keys(countries).map((k) => {
-    //   return <Thumbnail name={countries[k]['countryname']} gdp={countries[k]['gdp']}></Thumbnail>
-    // });
-    const { start_index, end_index, data } = this.state;
+    const { 
+      start_index, 
+      end_index, 
+      data, showModal, 
+      countryCode 
+    } = this.state;
     const dat = data.slice(start_index, end_index);
-    console.log(dat, start_index, end_index);
-    // const page = dat.map(x => console.log(x))
+    // console.log(dat);
 		return (
 			<div>
         <Header />
         <div className="layout">
           <h1 className="intro">NatGDP shows national GDP (Gross Domestic Product) data from across the world from 1960 to 2018</h1>
         </div>
-				<div className="layout">
+				<div 
+          className="layout"
+        >
         {
-          dat.map(x =>
-            <Thumbnail name={x['countryname']} gdp={x['gdp']}></Thumbnail>
+          dat.map( (x, index) =>
+            <Thumbnail
+              name={ x['countryname'] } 
+              gdp={ x['gdp'] } 
+              key={ x['code'] }
+              toggle={ this.openModal }
+              countCode={ x['code'] }
+              >
+              </Thumbnail>
           )
         }
 				</div>
@@ -73,6 +99,13 @@ class Home extends React.Component {
         }
           
         </div>
+        {
+          showModal &&
+            <Card
+            toggle={this.closeModal}
+            value={countryCode}
+            />
+        }
 			</div>
     )
 	}

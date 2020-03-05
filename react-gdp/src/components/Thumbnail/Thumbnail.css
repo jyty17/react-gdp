@@ -20,6 +20,7 @@
   margin-top: -9%;
   line-height: 0px;
   transition: all 0.2s ease;
+  font-size: 1.5vw;
 }
 .thumb-name:hover {
   transform: translateY(0, -50%);
