@@ -11,7 +11,7 @@ class Home extends React.Component {
     super();
     this.state = {
       start_index: 0,
-      end_index: 10,
+      end_index: 12,
       data: [],
       showModal: false,
       countryCode: ""
@@ -30,15 +30,15 @@ class Home extends React.Component {
 
   index_forward(e) {
     this.setState({ 
-      start_index: this.state.start_index + 10,
-      end_index: this.state.end_index + 10
+      start_index: this.state.start_index + 12,
+      end_index: this.state.end_index + 12
     })
   }
 
   index_backward(e) {
     this.setState({
-      start_index: this.state.start_index - 10,
-      end_index: this.state.end_index - 10
+      start_index: this.state.start_index - 12,
+      end_index: this.state.end_index - 12
     })
   }
 
@@ -46,7 +46,7 @@ class Home extends React.Component {
     this.setState({
       showModal: !this.state.showModal
     });
-    console.log(this.state.showModal);
+    // console.log(this.state.showModal);
   }
 
   openModal(countCode) {
@@ -54,7 +54,7 @@ class Home extends React.Component {
       showModal: !this.state.showModal,
       countryCode: countCode
     });
-    console.log(this.state.showModal, this.state.countryCode);
+    // console.log(this.state.showModal, this.state.countryCode);
   }
 
 	render() {

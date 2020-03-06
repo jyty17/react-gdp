@@ -35,35 +35,36 @@ class Card extends React.Component {
 
 	render() {
     const { value } = this.props;
-    console.log("Card", this.props, this.state.data);
-    const country = this.state.data['countryname']
-    // const organizedData = this.state.data.reduce( 
-    //   (acc, cur) => {
-
-    //   }
-    // );
-    this.state.data.map(x => {
-      console.log(x)
-    })
-    // console.log(organizedData);
+    const { data } = this.state;
+    // console.log("Card", this.props, this.state.data);
+    var countryname = "";
+    if (data.length) {
+      // console.log(this.state.data[0].countryname);
+      countryname = data.countryname;
+    }
+    // this.state.data.map( (x, i) => {
+    //   console.log(x, i)
+    // })
 		return (
       <div className="card-layout">
-        <div className="card-modal">
-          <div 
-          className="card-close"
-          onClick={this.props.toggle.bind(this)}
-          >x</div>
-          <h1>{ value }</h1>
-          <LineChart width={600} height={400} data={this.state.data}>
-            <Line type="monotone" dataKey="uv" stroke="#000000" />
-            <CartesianGrid stroke="#ccc" />
-            <XAxis dataKey="name" />
-            <YAxis />
-          </LineChart>
-          { //this.state.data.map(x => x) 
-          }
-          <p>Chart shows the gdp of { value } from 1960 - 2018</p>
-        </div>
+        { data.length > 0 && 
+          <div className="card-modal">
+            <div 
+            className="card-close"
+            onClick={this.props.toggle.bind(this)}
+            >x</div>
+            <h1>{ countryname }</h1>
+            <LineChart width={600} height={400} data={this.state.data}>
+              <Line type="monotone" dataKey="uv" stroke="#000000" />
+              <CartesianGrid stroke="#ccc" />
+              <XAxis dataKey="name" />
+              <YAxis />
+            </LineChart>
+            { //this.state.data.map(x => x) 
+            }
+            <p>Chart shows the gdp of { countryname } from 1960 - 2018</p>
+          </div>
+      }
       </div>
 		)
 	}
