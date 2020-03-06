@@ -80,7 +80,7 @@ class Home extends React.Component {
             <Thumbnail
               name={ x['countryname'] } 
               gdp={ x['gdp'] } 
-              key={ x['code'] }
+              key={ index }
               toggle={ this.openModal }
               countCode={ x['code'] }
               >

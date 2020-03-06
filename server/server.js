@@ -40,7 +40,15 @@ app.get("/country/:id", (req, res) => {
     if(error) {
       throw error
     }
-    console.log(result.rows)
+    // console.log(result.rows)
+    const data = result.rows;
+    console.log(data['index']);
+    // const formatted = Array.from(data,
+    //   ([key, value]) => {
+    //     key,
+    //     value
+    //   })
+    // console.log(formatted);
     res.status(200).json(result.rows)
   })
 }); // id given as country code
