@@ -42,13 +42,18 @@ app.get("/country/:id", (req, res) => {
     }
     // console.log(result.rows)
     const data = result.rows;
-    console.log(data['index']);
+    console.log(data[0]['countryname']);
+    const d = Array.from(data[0], ([key, value]) => {
+      key,
+      value
+    });
     // const formatted = Array.from(data,
     //   ([key, value]) => {
     //     key,
     //     value
     //   })
     // console.log(formatted);
+    console.log(d);
     res.status(200).json(result.rows)
   })
 }); // id given as country code

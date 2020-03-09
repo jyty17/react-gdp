@@ -4,7 +4,9 @@ import {
   Line,
   CartesianGrid,
   XAxis,
-  YAxis
+  YAxis,
+  Tooltip,
+  ResponsiveContainer
 } from 'recharts';
 import './Card.css'
 
@@ -38,9 +40,18 @@ class Card extends React.Component {
     const { data } = this.state;
     // console.log("Card", this.props, this.state.data);
     var countryname = "";
-    if (data.length) {
-      // console.log(this.state.data[0].countryname);
-      countryname = data.countryname;
+    var restructDat = [];
+    if (data.length > 0) {
+      countryname = data[0].countryname;
+      restructDat = Object.keys(data[0]).slice(0, 58).reduce( (acc, cur) => {
+        acc.push({
+          year: cur,
+          gdp: data[0][cur]
+        });
+        return acc;
+      }, [])
+      console.log(restructDat);
+
     }
     // this.state.data.map( (x, i) => {
     //   console.log(x, i)
@@ -54,14 +65,23 @@ class Card extends React.Component {
             onClick={this.props.toggle.bind(this)}
             >x</div>
             <h1>{ countryname }</h1>
-            <LineChart width={600} height={400} data={this.state.data}>
-              <Line type="monotone" dataKey="uv" stroke="#000000" />
-              <CartesianGrid stroke="#ccc" />
-              <XAxis dataKey="name" />
-              <YAxis />
-            </LineChart>
-            { //this.state.data.map(x => x) 
-            }
+            <ResponsiveContainer width="80%" height="50%" >
+              <LineChart data={restructDat}>
+                <Line 
+                  type="monotone" 
+                  dataKey="gdp" 
+                  stroke="#000000" 
+                  margin={{
+                    top: 0,
+                    right: 20,
+                    bottom: 0,
+                    left: 20
+                  }}/>
+                <CartesianGrid stroke="#ccc" />
+                <Tooltip />
+                <XAxis dataKey="year" />
+              </LineChart>
+            </ResponsiveContainer>
             <p>Chart shows the gdp of { countryname } from 1960 - 2018</p>
           </div>
       }
